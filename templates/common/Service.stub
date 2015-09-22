@@ -1,6 +1,7 @@
 <?php namespace $NAMESPACE_SERVICE$;
 
 use $NAMESPACE_MODEL$\$MODEL_NAME$;
+use App\Utils\QueryBuilderHelper;
 
 class $MODEL_NAME$Service extends BaseService
 {
