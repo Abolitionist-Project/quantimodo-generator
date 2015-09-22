@@ -27,8 +27,6 @@ And your simple CRUD and APIs are ready in mere seconds.
 
 Here is the full documentation.
 
-[Upgrade Guide](https://github.com/mitulgolakiya/laravel-api-generator/blob/master/Upgrade_Guide.md).
-
 # Documentation is in process...
 
 Documentation
@@ -58,14 +56,11 @@ Documentation
         "repositories": [
             {
                 "type": "git",
-                "url": "https://github.com/mitulgolakiya/laracast-flash"
+                "url": "https://github.com/mitulgolakiya/quantimodo-generator"
             }
         ],
         "require": {
-            "laracasts/flash": "dev-master",
-            "laravelcollective/html": "5.1.*@dev",
-            "bosnadev/repositories": "dev-master",
-            "mitulgolakiya/laravel-api-generator": "dev-master"
+            "quantimodo/generator": "dev-master"
         }
   
 2. Run composer update
@@ -73,24 +68,14 @@ Documentation
         composer update
     
 3. Add the ServiceProviders to the providers array in ```config/app.php```.<br>
-   As we are using these two packages [laravelcollective/html](https://github.com/LaravelCollective/html) & [laracasts/flash](https://github.com/laracasts/flash) as a dependency.<br>
-   so we need to add those ServiceProviders as well.
 
-		Collective\Html\HtmlServiceProvider::class,
-		Laracasts\Flash\FlashServiceProvider::class,
-		Mitul\Generator\GeneratorServiceProvider::class,
+		Quantimodo\Generator\GeneratorServiceProvider::class,
         
-   Also for convenience, add these facades in alias array in ```config/app.php```.
-
-		'Form'      => Collective\Html\FormFacade::class,
-		'Html'      => Collective\Html\HtmlFacade::class,
-		'Flash'     => Laracasts\Flash\Flash::class
-
 ## Configuration
 
 Publish Configuration file ```generator.php```.
 
-        php artisan vendor:publish --provider="Mitul\Generator\GeneratorServiceProvider"
+        php artisan vendor:publish --provider="Quantimodo\Generator\GeneratorServiceProvider"
         
 Config file (```config/generator.php```) contains path for all generated files
 
@@ -126,7 +111,7 @@ Mainly, we need to do three basic things to get started.
 2. Publish ```api_routes.php``` which will contain all our api routes.
 3. Init ```routes.php``` for api routes. We need to include ```api_routes.php``` into main ```routes.php```.
 
-        php artisan mitul.generator:publish
+        php artisan quantimodo.generator:publish
 
 ## Generator
 
@@ -134,28 +119,28 @@ Fire artisan command to generate API, Scaffold with CRUD views or both API as we
 
 Generate API:
 
-        php artisan mitul.generator:api ModelName
+        php artisan quantimodo.generator:api ModelName
     
 Generate CRUD Scaffold:
  
-        php artisan mitul.generator:scaffold ModelName
+        php artisan quantimodo.generator:scaffold ModelName
         
 Generate CRUD Scaffold with API:
         
-        php artisan mitul.generator:scaffold_api ModelName
+        php artisan quantimodo.generator:scaffold_api ModelName
         
 e.g.
     
-    php artisan mitul.generator:api Project
-    php artisan mitul.generator:api Post
+    php artisan quantimodo.generator:api Project
+    php artisan quantimodo.generator:api Post
 
-    php artisan mitul.generator:scaffold Project
-    php artisan mitul.generator:scaffold Post
+    php artisan quantimodo.generator:scaffold Project
+    php artisan quantimodo.generator:scaffold Post
 
-    php artisan mitul.generator:scaffold_api Project
-    php artisan mitul.generator:scaffold_api Post
+    php artisan quantimodo.generator:scaffold_api Project
+    php artisan quantimodo.generator:scaffold_api Post
 
-Here is the sample [fields input json](https://github.com/mitulgolakiya/laravel-api-generator/blob/master/samples/fields.json)
+Here is the sample [fields input json](https://github.com/mitulgolakiya/quantimodo-generator/blob/master/samples/fields.json)
 
 ## Supported HTML Field Types
 
@@ -183,7 +168,7 @@ If you want to use your own base controller or want to extend/modify default App
 
     1. Publish AppBaseController in your controllers path
     
-        php artisan mitul.generator:publish --baseController
+        php artisan quantimodo.generator:publish --baseController
         
     2. Modify the content of ```AppBaseController.php``` and set it as a ```base_controller``` in ```config/generator.php```
 
@@ -193,7 +178,7 @@ To use your own custom templates,
 
 1. Publish templates to  ```/resources/api-generator-templates```
 
-        php artisan mitul.generator:publish --templates
+        php artisan quantimodo.generator:publish --templates
 
 2. Leave only those templates that you want to change. Remove the templates that do not plan to change.
 
@@ -204,40 +189,40 @@ To use your own custom templates,
 To paginate records, you can specify paginate option,
 e.g.
 
-        php artisan mitul.generator:api Post --paginate=10
+        php artisan quantimodo.generator:api Post --paginate=10
 
 ### Model Soft Deletes
 
 To use SoftDelete, use softDelete option,
 
-        php artisan mitul.generator:api Post --softDelete
+        php artisan quantimodo.generator:api Post --softDelete
 
 ### Fields From File
 
-If you want to pass fields from file then you can create fields json file and pass it via command line. Here is the sample [fields.json](https://github.com/mitulgolakiya/laravel-api-generator/blob/master/samples/fields.json)
+If you want to pass fields from file then you can create fields json file and pass it via command line. Here is the sample [fields.json](https://github.com/mitulgolakiya/quantimodo-generator/blob/master/samples/fields.json)
 
 You have to pass option ```--fieldsFile=absolute_file_path_or_path_from_base_directory``` with command. e.g.
 
-         php artisan mitul.generator:scaffold_api Post --fieldsFile="/Users/Mitul/laravel-api-generator/fields.json"
-         php artisan mitul.generator:scaffold_api Post --fieldsFile="fields.json"
+         php artisan quantimodo.generator:scaffold_api Post --fieldsFile="/Users/Mitul/laravel-api-generator/fields.json"
+         php artisan quantimodo.generator:scaffold_api Post --fieldsFile="fields.json"
 
 ### Custom Table Name
 
 You can also specify your own custom table name by,
 
-        php artisan mitul.generator:api Post --tableName=custom_table_name
+        php artisan quantimodo.generator:api Post --tableName=custom_table_name
 
 ### Skip Migration
 
 You can also skip migration generation,
 
-        php artisan mitul.generator:api Post --skipMigration
+        php artisan quantimodo.generator:api Post --skipMigration
 
 ### Remember Token
 
 To generate rememberToken field in migration file,
 
-        php artisan mitul.generator:api Post --rememberToken
+        php artisan quantimodo.generator:api Post --rememberToken
 
 ## Generator from existing tables
 
@@ -247,7 +232,7 @@ Just make sure, you have installed ```doctrine/dbal``` package.
 
 **Limitation:** As of now it is not fully working (work is in progress). It will not create migration file. You need to tweak some of the things in your generated files like timestamps, primary key etc. 
 
-        php artisan mitul.generator:api Post --fromTable --tableName=posts
+        php artisan quantimodo.generator:api Post --fromTable --tableName=posts
 
 Credits
 --------

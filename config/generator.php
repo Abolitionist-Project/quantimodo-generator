@@ -11,7 +11,7 @@ return [
     |
     */
 
-    'base_controller'          => 'Mitul\Controller\AppBaseController',
+    'base_controller'          => 'Quantimodo\Controller\AppBaseController',
 
     /*
     |--------------------------------------------------------------------------
