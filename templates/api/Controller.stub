@@ -47,7 +47,7 @@ class $MODEL_NAME$Controller extends BaseController
      */
     public function show($id, $MODEL_NAME$Service $$MODEL_NAME_CAMEL$Service)
     {
-        $$MODEL_NAME_CAMEL$ = $$MODEL_NAME_CAMEL$Service->first($id);
+        $$MODEL_NAME_CAMEL$ = $$MODEL_NAME_CAMEL$Service->find($id);
 
         return new JsonResponse($$MODEL_NAME_CAMEL$);
     }

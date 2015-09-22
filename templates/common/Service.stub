@@ -6,15 +6,17 @@ use App\Utils\QueryBuilderHelper;
 class $MODEL_NAME$Service extends BaseService
 {
     /**
+     * @param array $fields
+     * @param array $filters
      * @return \Illuminate\Database\Eloquent\Collection|$MODEL_NAME$[]
      */
-    public function all($fields = ['*'], $filters = [])
+    public function all($columns = ['*'], $filters = [])
     {
         $query = $MODEL_NAME$::query();
 
         QueryBuilderHelper::applyOffsetLimitSort($query->getQuery(), $filters);
 
-        return $query->get($fields);
+        return $query->get($columns);
     }
 
     /**
@@ -28,11 +30,12 @@ class $MODEL_NAME$Service extends BaseService
 
     /**
      * @param int $id
+     * @param array $columns
      * @return null|$MODEL_NAME$
      */
-    public function first($id)
+    public function find($id, $columns = ['*'])
     {
-        return $MODEL_NAME$::first($id);
+        return $MODEL_NAME$::find($id, $columns);
     }
 
     /**
@@ -42,7 +45,7 @@ class $MODEL_NAME$Service extends BaseService
      */
     public function updateRich(array $data, $id)
     {
-        if (!($$MODEL_NAME_CAMEL$ = $this->first($id))) {
+        if (!($$MODEL_NAME_CAMEL$ = $this->find($id))) {
             return false;
         }
 
@@ -55,11 +58,10 @@ class $MODEL_NAME$Service extends BaseService
      */
     public function delete($id)
     {
-        if (!($$MODEL_NAME_CAMEL$ = $this->first($id))) {
+        if (!($$MODEL_NAME_CAMEL$ = $this->find($id))) {
             return false;
         }
 
         return $$MODEL_NAME_CAMEL$->delete();
     }
 }
-
