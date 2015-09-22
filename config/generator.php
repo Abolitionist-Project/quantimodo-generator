@@ -30,7 +30,7 @@ return [
 
     'path_controller'          => app_path('Http/Controllers/'),
 
-    'path_api_controller'      => app_path('Http/Controllers/API/'),
+    'path_api_controller'      => app_path('Http/Controllers/'),
 
     'path_views'               => base_path('resources/views/'),
 
@@ -38,7 +38,7 @@ return [
 
     'path_routes'              => app_path('Http/routes.php'),
 
-    'path_api_routes'          => app_path('Http/api_routes.php'),
+    'path_api_routes'          => app_path('Http/routes.php'),
 
     /*
     |--------------------------------------------------------------------------
@@ -51,31 +51,13 @@ return [
 
     'namespace_model'          => 'App\Models',
 
-    'namespace_repository'     => 'App\Libraries\Repositories',
+    'namespace_repository'     => 'App\Services',
 
     'namespace_controller'     => 'App\Http\Controllers',
 
-    'namespace_api_controller' => 'App\Http\Controllers\API',
+    'namespace_api_controller' => 'App\Http\Controllers',
 
     'namespace_request'        => 'App\Http\Requests',
-
-    /*
-    |--------------------------------------------------------------------------
-    | Model extend
-    |--------------------------------------------------------------------------
-    |
-    | Model extend Configuration.
-    | By default Eloquent model will be used.
-    | If you want to extend your own custom model then you can specify "model_extend" => true and "model_extend_namespace" & "model_extend_class".
-    |
-    | e.g.
-    | 'model_extend' => true,
-    | 'model_extend_namespace' => 'App\Models\AppBaseModel as AppBaseModel',
-    | 'model_extend_class' => 'AppBaseModel',
-    |
-    */
-
-    'model_extend_class'   => 'Illuminate\Database\Eloquent\Model',
 
     /*
     |--------------------------------------------------------------------------
