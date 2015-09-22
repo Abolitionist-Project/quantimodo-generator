@@ -6,7 +6,7 @@ use Quantimodo\Generator\CommandData;
 use Quantimodo\Generator\Generators\API\APIControllerGenerator;
 use Quantimodo\Generator\Generators\Common\MigrationGenerator;
 use Quantimodo\Generator\Generators\Common\ModelGenerator;
-use Quantimodo\Generator\Generators\Common\RepositoryGenerator;
+use Quantimodo\Generator\Generators\Common\ServiceGenerator;
 use Quantimodo\Generator\Generators\Common\RoutesGenerator;
 
 class APIGeneratorCommand extends BaseCommand
@@ -44,7 +44,7 @@ class APIGeneratorCommand extends BaseCommand
     {
         parent::handle();
 
-        if (!$this->commandData->skipMigration) {
+        if (!$this->commandData->skipMigration and !$this->commandData->fromTable) {
             $migrationGenerator = new MigrationGenerator($this->commandData);
             $migrationGenerator->generate();
         }
@@ -52,11 +52,11 @@ class APIGeneratorCommand extends BaseCommand
         $modelGenerator = new ModelGenerator($this->commandData);
         $modelGenerator->generate();
 
-        $repositoryGenerator = new RepositoryGenerator($this->commandData);
-        $repositoryGenerator->generate();
+        $serviceGenerator = new ServiceGenerator($this->commandData);
+        $serviceGenerator->generate();
 
-        $repoControllerGenerator = new APIControllerGenerator($this->commandData);
-        $repoControllerGenerator->generate();
+        $controllerGenerator = new APIControllerGenerator($this->commandData);
+        $controllerGenerator->generate();
 
         $routeGenerator = new RoutesGenerator($this->commandData);
         $routeGenerator->generate();

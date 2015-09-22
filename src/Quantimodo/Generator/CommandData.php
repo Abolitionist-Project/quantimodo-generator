@@ -133,11 +133,11 @@ class CommandData
 
             '$NAMESPACE_CONTROLLER$'     => Config::get('generator.namespace_controller', 'App\Http\Controllers'),
 
-            '$NAMESPACE_API_CONTROLLER$' => Config::get('generator.namespace_api_controller', 'App\Http\Controllers\API'),
+            '$NAMESPACE_API_CONTROLLER$' => Config::get('generator.namespace_api_controller', 'App\Http\Controllers'),
 
             '$NAMESPACE_REQUEST$'        => Config::get('generator.namespace_request', 'App\Http\Requests'),
 
-            '$NAMESPACE_REPOSITORY$'     => Config::get('generator.namespace_repository', 'App\Libraries\Repositories'),
+            '$NAMESPACE_SERVICE$'     => Config::get('generator.namespace_service', 'App\Services'),
 
             '$NAMESPACE_MODEL$'          => Config::get('generator.namespace_model', 'App\Models'),
 

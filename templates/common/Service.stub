@@ -1,0 +1,64 @@
+<?php namespace $NAMESPACE_SERVICE$;
+
+use $NAMESPACE_MODEL$\$MODEL_NAME$;
+
+class $MODEL_NAME$Service extends BaseService
+{
+    /**
+     * @return \Illuminate\Database\Eloquent\Collection|$MODEL_NAME$[]
+     */
+    public function all($fields = ['*'], $filters = [])
+    {
+        $query = $MODEL_NAME$::query();
+
+        QueryBuilderHelper::applyOffsetLimitSort($query->getQuery(), $filters);
+
+        return $query->get($fields);
+    }
+
+    /**
+     * @param array $input
+     * @return $MODEL_NAME$
+     */
+    public function create($input)
+    {
+        return $MODEL_NAME$::create($input);
+    }
+
+    /**
+     * @param int $id
+     * @return null|$MODEL_NAME$
+     */
+    public function first($id)
+    {
+        return $MODEL_NAME$::first($id);
+    }
+
+    /**
+     * @param array $data
+     * @param int $id
+     * @return bool
+     */
+    public function updateRich(array $data, $id)
+    {
+        if (!($$MODEL_NAME_CAMEL$ = $this->first($id))) {
+            return false;
+        }
+
+        return $$MODEL_NAME_CAMEL$->fill($data)->save();
+    }
+
+    /**
+     * @param int $id
+     * @return bool|null
+     */
+    public function delete($id)
+    {
+        if (!($$MODEL_NAME_CAMEL$ = $this->first($id))) {
+            return false;
+        }
+
+        return $$MODEL_NAME_CAMEL$->delete();
+    }
+}
+

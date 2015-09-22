@@ -18,15 +18,11 @@ class RoutesGenerator implements GeneratorProvider
     /** @var string */
     private $apiPath;
 
-    /** @var bool */
-    private $useDingo;
-
     public function __construct($commandData)
     {
         $this->commandData = $commandData;
         $this->path = Config::get('generator.path_routes', app_path('Http/routes.php'));
-        $this->apiPath = Config::get('generator.path_api_routes', app_path('Http/api_routes.php'));
-        $this->useDingo = Config::get('generator.use_dingo_api', false);
+        $this->apiPath = Config::get('generator.path_api_routes', app_path('Http/routes.php'));
     }
 
     public function generate()
@@ -45,15 +41,12 @@ class RoutesGenerator implements GeneratorProvider
     {
         $routeContents = $this->commandData->fileHelper->getFileContents($this->apiPath);
 
-        if ($this->useDingo) {
-            $routeContents .= "\n\n".'$api->resource("'.$this->commandData->modelNamePluralCamel.'", "'.$this->commandData->modelName.'APIController");';
-        } else {
-            $routeContents .= "\n\n".'Route::resource("'.$this->commandData->modelNamePluralCamel.'", "'.$this->commandData->modelName.'APIController");';
-        }
+        $routeContents .= "\n\n" . 'Route::resource("' . $this->commandData->modelNamePluralCamel . '", "' .
+            $this->commandData->modelName . 'Controller");';
 
         $this->commandData->fileHelper->writeFile($this->apiPath, $routeContents);
-        $this->commandData->commandObj->comment("\napi_routes.php modified:");
-        $this->commandData->commandObj->info('"'.$this->commandData->modelNamePluralCamel.'" route added.');
+        $this->commandData->commandObj->comment("\nroutes.php modified:");
+        $this->commandData->commandObj->info('"' . $this->commandData->modelNamePluralCamel . '" route added.');
     }
 
     private function generateScaffoldRoutes()
@@ -64,10 +57,10 @@ class RoutesGenerator implements GeneratorProvider
 
         $templateData = GeneratorUtils::fillTemplate($this->commandData->dynamicVars, $templateData);
 
-        $routeContents .= "\n\n".$templateData;
+        $routeContents .= "\n\n" . $templateData;
 
         $this->commandData->fileHelper->writeFile($this->path, $routeContents);
         $this->commandData->commandObj->comment("\nroutes.php modified:");
-        $this->commandData->commandObj->info('"'.$this->commandData->modelNamePluralCamel.'" route added.');
+        $this->commandData->commandObj->info('"' . $this->commandData->modelNamePluralCamel . '" route added.');
     }
 }

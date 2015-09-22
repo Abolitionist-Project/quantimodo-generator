@@ -1,129 +1,92 @@
 <?php namespace $NAMESPACE_API_CONTROLLER$;
 
-use $NAMESPACE_REQUEST$;
-use $NAMESPACE_REPOSITORY$\$MODEL_NAME$Repository;
-use App\Models\$MODEL_NAME$;
+use App\Http\Requests;
+use App\Services\$MODEL_NAME$Service;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use $BASE_CONTROLLER$ as AppBaseController;
-use Response;
 
-class $MODEL_NAME$APIController extends AppBaseController
+class $MODEL_NAME$Controller extends BaseController
 {
-	/** @var  $MODEL_NAME$Repository */
-	private $$MODEL_NAME_CAMEL$Repository;
+    /**
+     * Display a listing of the $MODEL_NAME$.
+     * GET|HEAD /$MODEL_NAME_PLURAL_CAMEL$
+     *
+     * @param $MODEL_NAME$Service $$MODEL_NAME_CAMEL$Service
+     * @return JsonResponse
+     */
+    public function index($MODEL_NAME$Service $$MODEL_NAME_CAMEL$Service)
+    {
+        $$MODEL_NAME_PLURAL_CAMEL$ = $$MODEL_NAME_CAMEL$Service->all();
 
-	function __construct($MODEL_NAME$Repository $$MODEL_NAME_CAMEL$Repo)
-	{
-		$this->$MODEL_NAME_CAMEL$Repository = $$MODEL_NAME_CAMEL$Repo;
-	}
+        return new JsonResponse($$MODEL_NAME_PLURAL_CAMEL$->toArray());
+    }
 
-	/**
-	 * Display a listing of the $MODEL_NAME$.
-	 * GET|HEAD /$MODEL_NAME_PLURAL_CAMEL$
-	 *
-	 * @return Response
-	 */
-	public function index()
-	{
-		$$MODEL_NAME_PLURAL_CAMEL$ = $this->$MODEL_NAME_CAMEL$Repository->all();
+    /**
+     * Store a newly created $MODEL_NAME$.
+     * POST /$MODEL_NAME_PLURAL_CAMEL$
+     *
+     * @param Request $request
+     *
+     * @param $MODEL_NAME$Service $$MODEL_NAME_CAMEL$Service
+     * @return JsonResponse
+     */
+    public function store(Request $request, $MODEL_NAME$Service $$MODEL_NAME_CAMEL$Service)
+    {
+        $$MODEL_NAME_CAMEL$ = $$MODEL_NAME_CAMEL$Service->create($request->all());
 
-		return $this->sendResponse($$MODEL_NAME_PLURAL_CAMEL$->toArray(), "$MODEL_NAME_PLURAL$ retrieved successfully");
-	}
+        return new JsonResponse($$MODEL_NAME_CAMEL$);
+    }
 
-	/**
-	 * Show the form for creating a new $MODEL_NAME$.
-	 * GET|HEAD /$MODEL_NAME_PLURAL_CAMEL$/create
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-	}
+    /**
+     * Display the specified $MODEL_NAME$.
+     * GET|HEAD /$MODEL_NAME_PLURAL_CAMEL$/{id}
+     *
+     * @param $MODEL_NAME$Service $$MODEL_NAME_CAMEL$Service
+     * @param  int $id
+     * @return JsonResponse
+     */
+    public function show($id, $MODEL_NAME$Service $$MODEL_NAME_CAMEL$Service)
+    {
+        $$MODEL_NAME_CAMEL$ = $$MODEL_NAME_CAMEL$Service->first($id);
 
-	/**
-	 * Store a newly created $MODEL_NAME$ in storage.
-	 * POST /$MODEL_NAME_PLURAL_CAMEL$
-	 *
-	 * @param Request $request
-	 *
-	 * @return Response
-	 */
-	public function store(Request $request)
-	{
-		if(sizeof($MODEL_NAME$::$rules) > 0)
-			$this->validateRequestOrFail($request, $MODEL_NAME$::$rules);
+        return new JsonResponse($$MODEL_NAME_CAMEL$);
+    }
 
-		$input = $request->all();
+    /**
+     * Update the specified $MODEL_NAME$.
+     * PUT/PATCH /$MODEL_NAME_PLURAL_CAMEL$/{id}
+     *
+     * @param  int $id
+     * @param Request $request
+     *
+     * @param $MODEL_NAME$Service $$MODEL_NAME_CAMEL$Service
+     * @return JsonResponse
+     */
+    public function update($id, Request $request, $MODEL_NAME$Service $$MODEL_NAME_CAMEL$Service)
+    {
+        $input = $request->all();
 
-		$$MODEL_NAME_PLURAL_CAMEL$ = $this->$MODEL_NAME_CAMEL$Repository->create($input);
+        $result = $$MODEL_NAME_CAMEL$Service->updateRich($input, $id);
 
-		return $this->sendResponse($$MODEL_NAME_PLURAL_CAMEL$->toArray(), "$MODEL_NAME$ saved successfully");
-	}
+        if ($result == false) {
+        }
 
-	/**
-	 * Display the specified $MODEL_NAME$.
-	 * GET|HEAD /$MODEL_NAME_PLURAL_CAMEL$/{id}
-	 *
-	 * @param  int $id
-	 *
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		$$MODEL_NAME_CAMEL$ = $this->$MODEL_NAME_CAMEL$Repository->apiFindOrFail($id);
+        return new JsonResponse("$MODEL_NAME$ Updated successfully");
+    }
 
-		return $this->sendResponse($$MODEL_NAME_CAMEL$->toArray(), "$MODEL_NAME$ retrieved successfully");
-	}
+    /**
+     * Remove the specified $MODEL_NAME$ from storage.
+     * DELETE /$MODEL_NAME_PLURAL_CAMEL$/{id}
+     *
+     * @param  int $id
+     *
+     * @param $MODEL_NAME$Service $$MODEL_NAME_CAMEL$Service
+     * @return JsonResponse
+     */
+    public function destroy($id, $MODEL_NAME$Service $$MODEL_NAME_CAMEL$Service)
+    {
+        $$MODEL_NAME_CAMEL$Service->delete($id);
 
-	/**
-	 * Show the form for editing the specified $MODEL_NAME$.
-	 * GET|HEAD /$MODEL_NAME_PLURAL_CAMEL$/{id}/edit
-	 *
-	 * @param  int $id
-	 *
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		// maybe, you can return a template for JS
-//		Errors::throwHttpExceptionWithCode(Errors::EDITION_FORM_NOT_EXISTS, ['id' => $id], static::getHATEOAS(['%id' => $id]));
-	}
-
-	/**
-	 * Update the specified $MODEL_NAME$ in storage.
-	 * PUT/PATCH /$MODEL_NAME_PLURAL_CAMEL$/{id}
-	 *
-	 * @param  int              $id
-	 * @param Request $request
-	 *
-	 * @return Response
-	 */
-	public function update($id, Request $request)
-	{
-		$input = $request->all();
-
-		/** @var $MODEL_NAME$ $$MODEL_NAME_CAMEL$ */
-		$$MODEL_NAME_CAMEL$ = $this->$MODEL_NAME_CAMEL$Repository->apiFindOrFail($id);
-
-		$result = $this->$MODEL_NAME_CAMEL$Repository->updateRich($input, $id);
-
-		$$MODEL_NAME_CAMEL$ = $$MODEL_NAME_CAMEL$->fresh();
-
-		return $this->sendResponse($$MODEL_NAME_CAMEL$->toArray(), "$MODEL_NAME$ updated successfully");
-	}
-
-	/**
-	 * Remove the specified $MODEL_NAME$ from storage.
-	 * DELETE /$MODEL_NAME_PLURAL_CAMEL$/{id}
-	 *
-	 * @param  int $id
-	 *
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		$this->$MODEL_NAME_CAMEL$Repository->apiDeleteOrFail($id);
-
-		return $this->sendResponse($id, "$MODEL_NAME$ deleted successfully");
-	}
+        return new JsonResponse("$MODEL_NAME$ deleted successfully");
+    }
 }

@@ -26,7 +26,7 @@ return [
 
     'path_model'               => app_path('Models/'),
 
-    'path_repository'          => app_path('Libraries/Repositories/'),
+    'path_service'             => app_path('Services/'),
 
     'path_controller'          => app_path('Http/Controllers/'),
 

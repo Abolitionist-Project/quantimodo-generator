@@ -5,7 +5,7 @@ namespace Quantimodo\Generator\Commands;
 use Quantimodo\Generator\CommandData;
 use Quantimodo\Generator\Generators\Common\MigrationGenerator;
 use Quantimodo\Generator\Generators\Common\ModelGenerator;
-use Quantimodo\Generator\Generators\Common\RepositoryGenerator;
+use Quantimodo\Generator\Generators\Common\ServiceGenerator;
 use Quantimodo\Generator\Generators\Common\RequestGenerator;
 use Quantimodo\Generator\Generators\Common\RoutesGenerator;
 use Quantimodo\Generator\Generators\Scaffold\ViewControllerGenerator;
@@ -57,7 +57,7 @@ class ScaffoldGeneratorCommand extends BaseCommand
         $requestGenerator = new RequestGenerator($this->commandData);
         $requestGenerator->generate();
 
-        $repositoryGenerator = new RepositoryGenerator($this->commandData);
+        $repositoryGenerator = new ServiceGenerator($this->commandData);
         $repositoryGenerator->generate();
 
         $repoControllerGenerator = new ViewControllerGenerator($this->commandData);
