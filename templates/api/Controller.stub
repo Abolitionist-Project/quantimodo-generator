@@ -1,9 +1,9 @@
 <?php namespace $NAMESPACE_API_CONTROLLER$;
 
-use App\Http\Requests;
+use App\Http\Requests\Create$MODEL_NAME$Request;
+use App\Http\Requests\Update$MODEL_NAME$Request;
 use App\Services\$MODEL_NAME$Service;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 class $MODEL_NAME$Controller extends BaseController
 {
@@ -25,12 +25,12 @@ class $MODEL_NAME$Controller extends BaseController
      * Store a newly created $MODEL_NAME$.
      * POST /$MODEL_NAME_PLURAL_CAMEL$
      *
-     * @param Request $request
+     * @param Create$MODEL_NAME$Request $request
      *
      * @param $MODEL_NAME$Service $$MODEL_NAME_CAMEL$Service
      * @return JsonResponse
      */
-    public function store(Request $request, $MODEL_NAME$Service $$MODEL_NAME_CAMEL$Service)
+    public function store(Create$MODEL_NAME$Request $request, $MODEL_NAME$Service $$MODEL_NAME_CAMEL$Service)
     {
         $$MODEL_NAME_CAMEL$ = $$MODEL_NAME_CAMEL$Service->create($request->all());
 
@@ -57,12 +57,12 @@ class $MODEL_NAME$Controller extends BaseController
      * PUT/PATCH /$MODEL_NAME_PLURAL_CAMEL$/{id}
      *
      * @param  int $id
-     * @param Request $request
+     * @param Update$MODEL_NAME$Request $request
      *
      * @param $MODEL_NAME$Service $$MODEL_NAME_CAMEL$Service
      * @return JsonResponse
      */
-    public function update($id, Request $request, $MODEL_NAME$Service $$MODEL_NAME_CAMEL$Service)
+    public function update($id, Update$MODEL_NAME$Request $request, $MODEL_NAME$Service $$MODEL_NAME_CAMEL$Service)
     {
         $result = $$MODEL_NAME_CAMEL$Service->updateRich($request->all(), $id);
 

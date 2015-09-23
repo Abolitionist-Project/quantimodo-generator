@@ -23,7 +23,7 @@ class $MODEL_NAME$Service extends BaseService
      * @param array $input
      * @return $MODEL_NAME$
      */
-    public function create($input)
+    public function create(array $input)
     {
         return $MODEL_NAME$::create($input);
     }
