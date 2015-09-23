@@ -6,7 +6,7 @@ use App\Utils\QueryBuilderHelper;
 class $MODEL_NAME$Service extends BaseService
 {
     /**
-     * @param array $fields
+     * @param array $columns
      * @param array $filters
      * @return \Illuminate\Database\Eloquent\Collection|$MODEL_NAME$[]
      */

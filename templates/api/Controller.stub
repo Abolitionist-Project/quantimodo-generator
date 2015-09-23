@@ -64,9 +64,7 @@ class $MODEL_NAME$Controller extends BaseController
      */
     public function update($id, Request $request, $MODEL_NAME$Service $$MODEL_NAME_CAMEL$Service)
     {
-        $input = $request->all();
-
-        $result = $$MODEL_NAME_CAMEL$Service->updateRich($input, $id);
+        $result = $$MODEL_NAME_CAMEL$Service->updateRich($request->all(), $id);
 
         if ($result == false) {
         }

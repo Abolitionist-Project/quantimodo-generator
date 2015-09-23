@@ -61,8 +61,10 @@ class APIGeneratorCommand extends BaseCommand
         $routeGenerator = new RoutesGenerator($this->commandData);
         $routeGenerator->generate();
 
-        if ($this->confirm("\nDo you want to migrate database? [y|N]", false)) {
-            $this->call('migrate');
+        if (!$this->commandData->skipMigration and !$this->commandData->fromTable) {
+            if ($this->confirm("\nDo you want to migrate database? [y|N]", false)) {
+                $this->call('migrate');
+            }
         }
     }
 
