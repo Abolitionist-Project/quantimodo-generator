@@ -4,6 +4,7 @@ use App\Http\Requests\Create$MODEL_NAME$Request;
 use App\Http\Requests\Update$MODEL_NAME$Request;
 use App\Services\$MODEL_NAME$Service;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class $MODEL_NAME$Controller extends BaseController
 {
