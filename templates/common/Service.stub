@@ -1,4 +1,6 @@
-<?php namespace $NAMESPACE_SERVICE$;
+<?php
+
+namespace $NAMESPACE_SERVICE$;
 
 use $NAMESPACE_MODEL$\$MODEL_NAME$;
 use App\Utils\QueryBuilderHelper;

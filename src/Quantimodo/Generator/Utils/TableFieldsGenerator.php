@@ -25,6 +25,9 @@ class TableFieldsGenerator
     {
         $this->tableName = $tableName;
         $this->schema = DB::getDoctrineSchemaManager($tableName);
+        $platform = $this->schema->getDatabasePlatform();
+        $platform->registerDoctrineTypeMapping('enum', 'string');
+
 //		$this->table = $this->schema->listTableDetails($tableName);
 
 //		$this->analyzeIndexes();

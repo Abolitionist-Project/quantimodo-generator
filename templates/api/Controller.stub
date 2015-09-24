@@ -1,4 +1,6 @@
-<?php namespace $NAMESPACE_API_CONTROLLER$;
+<?php
+
+namespace $NAMESPACE_API_CONTROLLER$;
 
 use App\Http\Requests\Create$MODEL_NAME$Request;
 use App\Http\Requests\Update$MODEL_NAME$Request;
