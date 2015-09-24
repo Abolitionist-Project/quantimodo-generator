@@ -6,14 +6,15 @@ use App\Utils\QueryBuilderHelper;
 class $MODEL_NAME$Service extends BaseService
 {
     /**
-     * @param array $columns
      * @param array $filters
+     * @param array $columns
      * @return \Illuminate\Database\Eloquent\Collection|$MODEL_NAME$[]
      */
-    public function all($columns = ['*'], $filters = [])
+    public function all($filters = [], $columns = ['*'])
     {
         $query = $MODEL_NAME$::query();
 
+        QueryBuilderHelper::applyFilters($query->getQuery(), $filters);
         QueryBuilderHelper::applyOffsetLimitSort($query->getQuery(), $filters);
 
         return $query->get($columns);
