@@ -17,6 +17,7 @@ class SwaggerTemplateUtil
             }
             $type = $type[0];
             $propertyTemplate = str_replace('$FIELD_NAME$', $field, $template);
+            $propertyTemplate = str_replace('$DESCRIPTION$', $field, $propertyTemplate);
             $propertyTemplate = str_replace('$FIELD_TYPE$', $type, $propertyTemplate);
             if (!empty($format)) {
                 $format = ",\n *          format=\"" . $format . "\"";

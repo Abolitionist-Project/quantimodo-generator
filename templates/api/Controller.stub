@@ -8,87 +8,245 @@ use App\Services\$MODEL_NAME$Service;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
+/**
+ * Class $MODEL_NAME$Controller
+ * @package $NAMESPACE_API_CONTROLLER$
+ */
 class $MODEL_NAME$Controller extends BaseController
 {
     /**
-     * Display a listing of the $MODEL_NAME$.
-     * GET|HEAD /$MODEL_NAME_PLURAL_CAMEL$
-     *
      * @param Request $request
      * @param $MODEL_NAME$Service $$MODEL_NAME_CAMEL$Service
      * @return JsonResponse
+     *
+     * @SWG\Get(
+     *      path="/$MODEL_NAME_PLURAL_CAMEL$",
+     *      summary="Get all $MODEL_NAME_PLURAL$",
+     *      tags={"$MODEL_NAME_PLURAL$"},
+     *      description="Get all $MODEL_NAME_PLURAL$",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="cause_id",
+     *          in="query",
+     *          description="Cause Id",
+     *          required=false,
+     *          type="integer"
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="data",
+     *                  type="array",
+     *                  @SWG\Items(ref="#/definitions/$MODEL_NAME$")
+     *              ),
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function index(Request $request, $MODEL_NAME$Service $$MODEL_NAME_CAMEL$Service)
     {
         $$MODEL_NAME_PLURAL_CAMEL$ = $$MODEL_NAME_CAMEL$Service->all($request->all());
 
-        return new JsonResponse($$MODEL_NAME_PLURAL_CAMEL$->toArray());
+        return new JsonResponse([
+            'success' => true,
+            'data' => $$MODEL_NAME_PLURAL_CAMEL$->toArray()
+        ]);
     }
 
     /**
-     * Store a newly created $MODEL_NAME$.
-     * POST /$MODEL_NAME_PLURAL_CAMEL$
-     *
      * @param Create$MODEL_NAME$Request $request
-     *
      * @param $MODEL_NAME$Service $$MODEL_NAME_CAMEL$Service
      * @return JsonResponse
+     *
+     * @SWG\Post(
+     *      path="/$MODEL_NAME_PLURAL_CAMEL$",
+     *      summary="Store $MODEL_NAME$",
+     *      tags={"$MODEL_NAME_PLURAL$"},
+     *      description="Store $MODEL_NAME$",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="body",
+     *          in="body",
+     *          description="$MODEL_NAME$ that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/$MODEL_NAME$")
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="data",
+     *                  type="array",
+     *                  @SWG\Items(ref="#/definitions/$MODEL_NAME$")
+     *              ),
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function store(Create$MODEL_NAME$Request $request, $MODEL_NAME$Service $$MODEL_NAME_CAMEL$Service)
     {
         $$MODEL_NAME_CAMEL$ = $$MODEL_NAME_CAMEL$Service->create($request->all());
 
-        return new JsonResponse($$MODEL_NAME_CAMEL$);
+        return new JsonResponse([
+            'success' => true,
+            'data' => $$MODEL_NAME_CAMEL$->toArray()
+        ]);
     }
 
     /**
-     * Display the specified $MODEL_NAME$.
-     * GET|HEAD /$MODEL_NAME_PLURAL_CAMEL$/{id}
-     *
      * @param $MODEL_NAME$Service $$MODEL_NAME_CAMEL$Service
      * @param  int $id
      * @return JsonResponse
+     *
+     * @SWG\Get(
+     *      path="/$MODEL_NAME_PLURAL_CAMEL$/{id}",
+     *      summary="Get $MODEL_NAME$",
+     *      tags={"$MODEL_NAME_PLURAL$"},
+     *      description="Get $MODEL_NAME$",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="id",
+     *          description="id of $MODEL_NAME$",
+     *          type="integer",
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="data",
+     *                  type="array",
+     *                  @SWG\Items(ref="#/definitions/$MODEL_NAME$")
+     *              ),
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function show($id, $MODEL_NAME$Service $$MODEL_NAME_CAMEL$Service)
     {
         $$MODEL_NAME_CAMEL$ = $$MODEL_NAME_CAMEL$Service->find($id);
 
-        return new JsonResponse($$MODEL_NAME_CAMEL$);
+        return new JsonResponse([
+            'success' => true,
+            'data' => $$MODEL_NAME_CAMEL$->toArray()
+        ]);
     }
 
     /**
-     * Update the specified $MODEL_NAME$.
-     * PUT/PATCH /$MODEL_NAME_PLURAL_CAMEL$/{id}
-     *
      * @param  int $id
      * @param Update$MODEL_NAME$Request $request
-     *
      * @param $MODEL_NAME$Service $$MODEL_NAME_CAMEL$Service
      * @return JsonResponse
+     *
+     * @SWG\Put(
+     *      path="/$MODEL_NAME_PLURAL_CAMEL$/{id}",
+     *      summary="Update $MODEL_NAME$",
+     *      tags={"$MODEL_NAME_PLURAL$"},
+     *      description="Update $MODEL_NAME$",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="id",
+     *          description="id of $MODEL_NAME$",
+     *          type="integer",
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @SWG\Parameter(
+     *          name="body",
+     *          in="body",
+     *          description="$MODEL_NAME$ that should be updated",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/$MODEL_NAME$")
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="data",
+     *                  type="string"
+     *              ),
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function update($id, Update$MODEL_NAME$Request $request, $MODEL_NAME$Service $$MODEL_NAME_CAMEL$Service)
     {
-        $result = $$MODEL_NAME_CAMEL$Service->updateRich($request->all(), $id);
+        $$MODEL_NAME_CAMEL$Service->updateRich($request->all(), $id);
 
-        if ($result == false) {
-        }
-
-        return new JsonResponse("$MODEL_NAME$ Updated successfully");
+        return new JsonResponse([
+            'success' => true,
+            'data' => "$MODEL_NAME$ updated successfully"
+        ]);
     }
 
     /**
-     * Remove the specified $MODEL_NAME$ from storage.
-     * DELETE /$MODEL_NAME_PLURAL_CAMEL$/{id}
-     *
      * @param  int $id
-     *
      * @param $MODEL_NAME$Service $$MODEL_NAME_CAMEL$Service
      * @return JsonResponse
+     *
+     * @SWG\Delete(
+     *      path="/$MODEL_NAME_PLURAL_CAMEL$/{id}",
+     *      summary="Delete $MODEL_NAME$",
+     *      tags={"$MODEL_NAME_PLURAL$"},
+     *      description="Delete $MODEL_NAME$",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="id",
+     *          description="id of $MODEL_NAME$",
+     *          type="integer",
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="data",
+     *                  type="string"
+     *              ),
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function destroy($id, $MODEL_NAME$Service $$MODEL_NAME_CAMEL$Service)
     {
         $$MODEL_NAME_CAMEL$Service->delete($id);
 
-        return new JsonResponse("$MODEL_NAME$ deleted successfully");
+        return new JsonResponse([
+            'success' => true,
+            'data' => "$MODEL_NAME$ deleted successfully"
+        ]);
     }
 }
