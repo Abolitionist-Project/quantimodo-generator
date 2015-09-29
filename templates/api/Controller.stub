@@ -25,13 +25,6 @@ class $MODEL_NAME$Controller extends BaseController
      *      tags={"$MODEL_NAME$"},
      *      description="Get all $MODEL_NAME_PLURAL$",
      *      produces={"application/json"},
-     *      @SWG\Parameter(
-     *          name="cause_id",
-     *          in="query",
-     *          description="Cause Id",
-     *          required=false,
-     *          type="integer"
-     *      ),
      *      @SWG\Response(
      *          response=200,
      *          description="successful operation",
