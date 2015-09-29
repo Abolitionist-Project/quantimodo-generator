@@ -22,7 +22,7 @@ class $MODEL_NAME$Controller extends BaseController
      * @SWG\Get(
      *      path="/$MODEL_NAME_PLURAL_CAMEL$",
      *      summary="Get all $MODEL_NAME_PLURAL$",
-     *      tags={"$MODEL_NAME_PLURAL$"},
+     *      tags={"$MODEL_NAME$"},
      *      description="Get all $MODEL_NAME_PLURAL$",
      *      produces={"application/json"},
      *      @SWG\Parameter(
@@ -68,7 +68,7 @@ class $MODEL_NAME$Controller extends BaseController
      * @SWG\Post(
      *      path="/$MODEL_NAME_PLURAL_CAMEL$",
      *      summary="Store $MODEL_NAME$",
-     *      tags={"$MODEL_NAME_PLURAL$"},
+     *      tags={"$MODEL_NAME$"},
      *      description="Store $MODEL_NAME$",
      *      produces={"application/json"},
      *      @SWG\Parameter(
@@ -114,7 +114,7 @@ class $MODEL_NAME$Controller extends BaseController
      * @SWG\Get(
      *      path="/$MODEL_NAME_PLURAL_CAMEL$/{id}",
      *      summary="Get $MODEL_NAME$",
-     *      tags={"$MODEL_NAME_PLURAL$"},
+     *      tags={"$MODEL_NAME$"},
      *      description="Get $MODEL_NAME$",
      *      produces={"application/json"},
      *      @SWG\Parameter(
@@ -161,7 +161,7 @@ class $MODEL_NAME$Controller extends BaseController
      * @SWG\Put(
      *      path="/$MODEL_NAME_PLURAL_CAMEL$/{id}",
      *      summary="Update $MODEL_NAME$",
-     *      tags={"$MODEL_NAME_PLURAL$"},
+     *      tags={"$MODEL_NAME$"},
      *      description="Update $MODEL_NAME$",
      *      produces={"application/json"},
      *      @SWG\Parameter(
@@ -213,7 +213,7 @@ class $MODEL_NAME$Controller extends BaseController
      * @SWG\Delete(
      *      path="/$MODEL_NAME_PLURAL_CAMEL$/{id}",
      *      summary="Delete $MODEL_NAME$",
-     *      tags={"$MODEL_NAME_PLURAL$"},
+     *      tags={"$MODEL_NAME$"},
      *      description="Delete $MODEL_NAME$",
      *      produces={"application/json"},
      *      @SWG\Parameter(
