@@ -6,6 +6,7 @@ use Config;
 use Quantimodo\Generator\CommandData;
 use Quantimodo\Generator\Generators\GeneratorProvider;
 use Quantimodo\Generator\Utils\GeneratorUtils;
+use Quantimodo\Generator\Utils\SwaggerTemplateUtil;
 
 class ModelGenerator implements GeneratorProvider
 {
@@ -29,13 +30,13 @@ class ModelGenerator implements GeneratorProvider
 
         $templateData = $this->fillTemplate($templateData);
 
-        $fileName = $this->commandData->modelName.'.php';
+        $fileName = $this->commandData->modelName . '.php';
 
         if (!file_exists($this->path)) {
             mkdir($this->path, 0755, true);
         }
 
-        $path = $this->path.$fileName;
+        $path = $this->path . $fileName;
 
         $this->commandData->fileHelper->writeFile($path, $templateData);
         $this->commandData->commandObj->comment("\nModel created: ");
@@ -55,14 +56,23 @@ class ModelGenerator implements GeneratorProvider
         $fillables = [];
 
         foreach ($this->commandData->inputFields as $field) {
-            $fillables[] = '"'.$field['fieldName'].'"';
+            if (in_array($field['fieldName'], $this->commandData->excludedFields) or $field['fieldName']== "id") {
+                continue;
+            }
+            $fillables[] = '"' . $field['fieldName'] . '"';
         }
 
         $templateData = str_replace('$FIELDS$', implode(",\n\t\t", $fillables), $templateData);
 
         $templateData = str_replace('$RULES$', implode(",\n\t\t", $this->generateRules()), $templateData);
 
-        $templateData = str_replace('$CAST$', implode(",\n\t\t", $this->generateCasts()), $templateData);
+        $castFields = $this->generateCasts();
+
+        $templateData = str_replace('$CAST$', implode(",\n\t\t", $castFields), $templateData);
+
+        $fieldTypes = $this->generateSwaggerTypes();
+
+        $templateData = str_replace('$SWAGGER_DOCS$', $this->generateSwagger($fieldTypes, $fillables), $templateData);
 
         return $templateData;
     }
@@ -73,7 +83,7 @@ class ModelGenerator implements GeneratorProvider
 
         foreach ($this->commandData->inputFields as $field) {
             if (!empty($field['validations'])) {
-                $rule = '"'.$field['fieldName'].'" => "'.$field['validations'].'"';
+                $rule = '"' . $field['fieldName'] . '" => "' . $field['validations'] . '"';
                 $rules[] = $rule;
             }
         }
@@ -86,23 +96,37 @@ class ModelGenerator implements GeneratorProvider
         $casts = [];
 
         foreach ($this->commandData->inputFields as $field) {
+            if (in_array($field['fieldName'], $this->commandData->excludedFields)) {
+                continue;
+            }
             switch ($field['fieldType']) {
                 case 'integer':
-                    $rule = '"'.$field['fieldName'].'" => "integer"';
+                case 'long':
+                    $rule = '"' . $field['fieldName'] . '" => "integer"';
                     break;
                 case 'double':
-                    $rule = '"'.$field['fieldName'].'" => "double"';
+                    $rule = '"' . $field['fieldName'] . '" => "double"';
                     break;
                 case 'float':
-                    $rule = '"'.$field['fieldName'].'" => "float"';
+                    $rule = '"' . $field['fieldName'] . '" => "float"';
                     break;
                 case 'boolean':
-                    $rule = '"'.$field['fieldName'].'" => "boolean"';
+                    $rule = '"' . $field['fieldName'] . '" => "boolean"';
                     break;
                 case 'string':
                 case 'char':
                 case 'text':
-                    $rule = '"'.$field['fieldName'].'" => "string"';
+                case 'enum':
+                    $rule = '"' . $field['fieldName'] . '" => "string"';
+                    break;
+                case 'password':
+                    $rule = '"' . $field['fieldName'] . '" => "string"';
+                    break;
+                case 'date':
+                    $rule = '"' . $field['fieldName'] . '" => "string"';
+                    break;
+                case 'dateTime':
+                    $rule = '"' . $field['fieldName'] . '" => "string"';
                     break;
                 default:
                     $rule = '';
@@ -115,5 +139,70 @@ class ModelGenerator implements GeneratorProvider
         }
 
         return $casts;
+    }
+
+    public function generateSwaggerTypes()
+    {
+        $fieldTypes = [];
+
+        foreach ($this->commandData->inputFields as $field) {
+            switch ($field['fieldType']) {
+                case 'integer':
+                case 'long':
+                    $fieldTypes[$field['fieldName']] = "integer:int32";
+                    break;
+                case 'double':
+                    $fieldTypes[$field['fieldName']] = "number:double";
+                    break;
+                case 'float':
+                    $fieldTypes[$field['fieldName']] = "number:float";
+                    break;
+                case 'boolean':
+                    $fieldTypes[$field['fieldName']] = "boolean";
+                    break;
+                case 'string':
+                case 'char':
+                case 'text':
+                case 'enum':
+                    $fieldTypes[$field['fieldName']] = "string";
+                    break;
+                case 'byte':
+                    $fieldTypes[$field['fieldName']] = "string:byte";
+                    break;
+                case 'binary':
+                    $fieldTypes[$field['fieldName']] = "string:binary";
+                    break;
+                case 'password':
+                    $fieldTypes[$field['fieldName']] = "string:password";
+                    break;
+                case 'date':
+                    $fieldTypes[$field['fieldName']] = "string:date";
+                    break;
+                case 'dateTime':
+                    $fieldTypes[$field['fieldName']] = "string:date-time";
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        return $fieldTypes;
+    }
+
+    public function generateSwagger($fields, $fillables)
+    {
+        $template = $this->commandData->templatesHelper->getTemplate("Model", 'swagger');
+
+        $templateData = GeneratorUtils::fillTemplate($this->commandData->dynamicVars, $template);
+
+        $templateData = str_replace('$REQUIRED_FIELDS$', implode(", ", $fillables), $templateData);
+
+        $propertyTemplate = $this->commandData->templatesHelper->getTemplate("Property", 'swagger');
+
+        $properties = SwaggerTemplateUtil::preparePropertyFields($propertyTemplate, $fields);
+
+        $templateData = str_replace('$PROPERTIES$', implode(",\n", $properties), $templateData);
+
+        return $templateData;
     }
 }

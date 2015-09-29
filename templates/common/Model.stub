@@ -2,6 +2,7 @@
 
 namespace $NAMESPACE_MODEL$;
 $SOFT_DELETE_IMPORT$
+$SWAGGER_DOCS$
 class $MODEL_NAME$ extends BaseModel
 {
     $SOFT_DELETE$

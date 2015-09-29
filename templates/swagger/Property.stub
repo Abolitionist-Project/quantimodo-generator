@@ -1,0 +1,4 @@
+ *      @SWG\Property(
+ *          property="$FIELD_NAME$",
+ *          type="$FIELD_TYPE$"$FIELD_FORMAT$
+ *      )

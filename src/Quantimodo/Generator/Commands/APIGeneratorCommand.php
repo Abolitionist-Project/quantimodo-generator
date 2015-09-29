@@ -7,8 +7,8 @@ use Quantimodo\Generator\Generators\API\APIControllerGenerator;
 use Quantimodo\Generator\Generators\Common\MigrationGenerator;
 use Quantimodo\Generator\Generators\Common\ModelGenerator;
 use Quantimodo\Generator\Generators\Common\RequestGenerator;
-use Quantimodo\Generator\Generators\Common\ServiceGenerator;
 use Quantimodo\Generator\Generators\Common\RoutesGenerator;
+use Quantimodo\Generator\Generators\Common\ServiceGenerator;
 
 class APIGeneratorCommand extends BaseCommand
 {
@@ -73,16 +73,6 @@ class APIGeneratorCommand extends BaseCommand
     }
 
     /**
-     * Get the console command arguments.
-     *
-     * @return array
-     */
-    protected function getArguments()
-    {
-        return array_merge(parent::getArguments(), []);
-    }
-
-    /**
      * Get the console command options.
      *
      * @return array
@@ -90,5 +80,15 @@ class APIGeneratorCommand extends BaseCommand
     public function getOptions()
     {
         return array_merge(parent::getOptions(), []);
+    }
+
+    /**
+     * Get the console command arguments.
+     *
+     * @return array
+     */
+    protected function getArguments()
+    {
+        return array_merge(parent::getArguments(), []);
     }
 }

@@ -20,6 +20,7 @@ class CommandData
     public $fromTable;
     public $skipMigration;
     public $inputFields;
+    public $excludedFields = ['created_time', 'updated_time', 'created_at', 'updated_at'];
 
     /** @var  string */
     public $commandType;
@@ -123,6 +124,15 @@ class CommandData
     public function addDynamicVariable($name, $val)
     {
         $this->dynamicVars[$name] = $val;
+    }
+
+    public function getDynamicVariable($name, $default = null)
+    {
+        if (isset($this->dynamicVars[$name])) {
+            return $this->dynamicVars[$name];
+        }
+
+        return $default;
     }
 
     public static function getConfigDynamicVariables()
