@@ -6,6 +6,7 @@ use Config;
 use Quantimodo\Generator\CommandData;
 use Quantimodo\Generator\Generators\GeneratorProvider;
 use Quantimodo\Generator\Utils\GeneratorUtils;
+use Quantimodo\Generator\Utils\SwaggerTemplateUtil;
 
 class APIControllerGenerator implements GeneratorProvider
 {
@@ -25,7 +26,7 @@ class APIControllerGenerator implements GeneratorProvider
     {
         $templateData = $this->commandData->templatesHelper->getTemplate('Controller', 'api');
 
-        $templateData = GeneratorUtils::fillTemplate($this->commandData->dynamicVars, $templateData);
+        $templateData = $this->fillTemplate($templateData);
 
         $fileName = $this->commandData->modelName.'Controller.php';
 
@@ -38,5 +39,31 @@ class APIControllerGenerator implements GeneratorProvider
         $this->commandData->fileHelper->writeFile($path, $templateData);
         $this->commandData->commandObj->comment("\nAPI Controller created: ");
         $this->commandData->commandObj->info($fileName);
+    }
+
+    public function fillTemplate($templateData)
+    {
+        $templateData = GeneratorUtils::fillTemplate($this->commandData->dynamicVars, $templateData);
+
+        $fieldTypes = $this->commandData->getSwaggerTypes();
+
+        $fieldTypes = array_merge($fieldTypes, [
+            'limit' => 'integer',
+            'offset' => 'integer',
+            'sort' => 'string'
+        ]);
+
+        $templateData = str_replace('$PARAMETERS$', implode(",\n", $this->generateSwagger($fieldTypes)), $templateData);
+
+        return $templateData;
+    }
+
+    public function generateSwagger($fields)
+    {
+        $parameterTemplate = $this->commandData->templatesHelper->getTemplate("Parameter", 'swagger');
+
+        $parameters = SwaggerTemplateUtil::prepareIndexParameters($parameterTemplate, $fields);
+
+        return $parameters;
     }
 }

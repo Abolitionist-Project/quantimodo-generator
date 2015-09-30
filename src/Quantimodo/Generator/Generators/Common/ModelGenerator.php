@@ -70,7 +70,7 @@ class ModelGenerator implements GeneratorProvider
 
         $templateData = str_replace('$CAST$', implode(",\n\t\t", $castFields), $templateData);
 
-        $fieldTypes = $this->generateSwaggerTypes();
+        $fieldTypes = $this->commandData->getSwaggerTypes();
 
         $templateData = str_replace('$SWAGGER_DOCS$', $this->generateSwagger($fieldTypes, $fillables), $templateData);
 
@@ -139,54 +139,6 @@ class ModelGenerator implements GeneratorProvider
         }
 
         return $casts;
-    }
-
-    public function generateSwaggerTypes()
-    {
-        $fieldTypes = [];
-
-        foreach ($this->commandData->inputFields as $field) {
-            switch ($field['fieldType']) {
-                case 'integer':
-                case 'long':
-                    $fieldTypes[$field['fieldName']] = "integer:int32";
-                    break;
-                case 'double':
-                    $fieldTypes[$field['fieldName']] = "number:double";
-                    break;
-                case 'float':
-                    $fieldTypes[$field['fieldName']] = "number:float";
-                    break;
-                case 'boolean':
-                    $fieldTypes[$field['fieldName']] = "boolean";
-                    break;
-                case 'string':
-                case 'char':
-                case 'text':
-                case 'enum':
-                    $fieldTypes[$field['fieldName']] = "string";
-                    break;
-                case 'byte':
-                    $fieldTypes[$field['fieldName']] = "string:byte";
-                    break;
-                case 'binary':
-                    $fieldTypes[$field['fieldName']] = "string:binary";
-                    break;
-                case 'password':
-                    $fieldTypes[$field['fieldName']] = "string:password";
-                    break;
-                case 'date':
-                    $fieldTypes[$field['fieldName']] = "string:date";
-                    break;
-                case 'dateTime':
-                    $fieldTypes[$field['fieldName']] = "string:date-time";
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        return $fieldTypes;
     }
 
     public function generateSwagger($fields, $fillables)

@@ -25,6 +25,7 @@ class $MODEL_NAME$Controller extends BaseController
      *      tags={"$MODEL_NAME$"},
      *      description="Get all $MODEL_NAME_PLURAL$",
      *      produces={"application/json"},
+$PARAMETERS$,
      *      @SWG\Response(
      *          response=200,
      *          description="successful operation",

@@ -9,17 +9,16 @@ class $MODEL_NAME$Service extends BaseService
 {
     /**
      * @param array $filters
-     * @param array $columns
      * @return \Illuminate\Database\Eloquent\Collection|$MODEL_NAME$[]
      */
-    public function all($filters = [], $columns = ['*'])
+    public function all($filters = [])
     {
         $query = $MODEL_NAME$::query();
 
         QueryBuilderHelper::applyFilters($query->getQuery(), $filters);
         QueryBuilderHelper::applyOffsetLimitSort($query->getQuery(), $filters);
 
-        return $query->get($columns);
+        return $query->get();
     }
 
     /**

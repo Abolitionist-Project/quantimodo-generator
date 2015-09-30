@@ -28,4 +28,20 @@ class SwaggerTemplateUtil
 
         return $templates;
     }
+
+    public static function prepareIndexParameters($template, $fields)
+    {
+        $templates = [];
+
+        foreach ($fields as $field => $type) {
+            $type = explode(":", $type);
+            $type = $type[0];
+            $propertyTemplate = str_replace('$FIELD_NAME$', $field, $template);
+            $propertyTemplate = str_replace('$DESCRIPTION$', $field, $propertyTemplate);
+            $propertyTemplate = str_replace('$FIELD_TYPE$', $type, $propertyTemplate);
+            $templates[] = $propertyTemplate;
+        }
+
+        return $templates;
+    }
 }
