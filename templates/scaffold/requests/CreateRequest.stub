@@ -3,12 +3,9 @@
 namespace $NAMESPACE_REQUEST$;
 
 use Illuminate\Contracts\Validation\ValidatesWhenResolved;
-use Illuminate\Validation\ValidatesWhenResolvedTrait;
 
 class Create$MODEL_NAME$Request extends APIRequest implements ValidatesWhenResolved
 {
-    use ValidatesWhenResolvedTrait;
-
     /**
      * Determine if the user is authorized to make this request.
      *
