@@ -26,8 +26,4 @@ class Create$MODEL_NAME$Request extends APIRequest implements ValidatesWhenResol
         return [
         ];
     }
-
-    public function validate()
-    {
-    }
 }
