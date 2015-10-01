@@ -32,13 +32,13 @@ $PARAMETERS$,
      *          @SWG\Schema(
      *              type="object",
      *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
      *                  property="data",
      *                  type="array",
      *                  @SWG\Items(ref="#/definitions/$MODEL_NAME$")
-     *              ),
-     *              @SWG\Property(
-     *                  property="success",
-     *                  type="boolean"
      *              )
      *          )
      *      )
@@ -123,12 +123,12 @@ $PARAMETERS$,
      *          @SWG\Schema(
      *              type="object",
      *              @SWG\Property(
-     *                  property="data",
-     *                  ref="#/definitions/$MODEL_NAME$"
-     *              ),
-     *              @SWG\Property(
      *                  property="success",
      *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  ref="#/definitions/$MODEL_NAME$"
      *              )
      *          )
      *      )
@@ -176,12 +176,12 @@ $PARAMETERS$,
      *          @SWG\Schema(
      *              type="object",
      *              @SWG\Property(
-     *                  property="data",
-     *                  type="string"
-     *              ),
-     *              @SWG\Property(
      *                  property="success",
      *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  type="string"
      *              )
      *          )
      *      )
@@ -221,13 +221,13 @@ $PARAMETERS$,
      *          @SWG\Schema(
      *              type="object",
      *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
      *                  property="data",
      *                  type="string"
      *              ),
-     *              @SWG\Property(
-     *                  property="success",
-     *                  type="boolean"
-     *              )
      *          )
      *      )
      * )
