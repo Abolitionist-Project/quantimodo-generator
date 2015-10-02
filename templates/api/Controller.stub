@@ -2,6 +2,7 @@
 
 namespace $NAMESPACE_API_CONTROLLER$;
 
+use App\Exceptions\QuantimodoException;
 use App\Http\Requests\Create$MODEL_NAME$Request;
 use App\Http\Requests\Update$MODEL_NAME$Request;
 use App\Services\$MODEL_NAME$Service;
@@ -103,6 +104,7 @@ $PARAMETERS$,
      * @param $MODEL_NAME$Service $$MODEL_NAME_CAMEL$Service
      * @param  int $id
      * @return JsonResponse
+     * @throws QuantimodoException
      *
      * @SWG\Get(
      *      path="/$MODEL_NAME_PLURAL_CAMEL$/{id}",
@@ -138,6 +140,10 @@ $PARAMETERS$,
     {
         $$MODEL_NAME_CAMEL$ = $$MODEL_NAME_CAMEL$Service->find($id);
 
+        if (empty($$MODEL_NAME_CAMEL$)) {
+            throw new QuantimodoException(QuantimodoException::CODE_BAD_REQUEST, "Record not found");
+        }
+
         return new JsonResponse([
             'success' => true,
             'data' => $$MODEL_NAME_CAMEL$->toArray()
@@ -149,6 +155,7 @@ $PARAMETERS$,
      * @param Update$MODEL_NAME$Request $request
      * @param $MODEL_NAME$Service $$MODEL_NAME_CAMEL$Service
      * @return JsonResponse
+     * @throws QuantimodoException
      *
      * @SWG\Put(
      *      path="/$MODEL_NAME_PLURAL_CAMEL$/{id}",
@@ -189,7 +196,11 @@ $PARAMETERS$,
      */
     public function update($id, Update$MODEL_NAME$Request $request, $MODEL_NAME$Service $$MODEL_NAME_CAMEL$Service)
     {
-        $$MODEL_NAME_CAMEL$Service->updateRich($request->all(), $id);
+        $result = $$MODEL_NAME_CAMEL$Service->updateRich($request->all(), $id);
+
+        if ($result === false) {
+            throw new QuantimodoException(QuantimodoException::CODE_BAD_REQUEST, "Record not found");
+        }
 
         return new JsonResponse([
             'success' => true,
@@ -201,6 +212,7 @@ $PARAMETERS$,
      * @param  int $id
      * @param $MODEL_NAME$Service $$MODEL_NAME_CAMEL$Service
      * @return JsonResponse
+     * @throws QuantimodoException
      *
      * @SWG\Delete(
      *      path="/$MODEL_NAME_PLURAL_CAMEL$/{id}",
@@ -234,7 +246,11 @@ $PARAMETERS$,
      */
     public function destroy($id, $MODEL_NAME$Service $$MODEL_NAME_CAMEL$Service)
     {
-        $$MODEL_NAME_CAMEL$Service->delete($id);
+        $result = $$MODEL_NAME_CAMEL$Service->delete($id);
+
+        if ($result === false) {
+            throw new QuantimodoException(QuantimodoException::CODE_BAD_REQUEST, "Record not found");
+        }
 
         return new JsonResponse([
             'success' => true,
