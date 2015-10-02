@@ -101,6 +101,7 @@ class ModelGenerator implements GeneratorProvider
             }
             switch ($field['fieldType']) {
                 case 'integer':
+                case 'smallInteger':
                 case 'long':
                     $rule = '"' . $field['fieldName'] . '" => "integer"';
                     break;
@@ -108,6 +109,7 @@ class ModelGenerator implements GeneratorProvider
                     $rule = '"' . $field['fieldName'] . '" => "double"';
                     break;
                 case 'float':
+                case 'decimal':
                     $rule = '"' . $field['fieldName'] . '" => "float"';
                     break;
                 case 'boolean':

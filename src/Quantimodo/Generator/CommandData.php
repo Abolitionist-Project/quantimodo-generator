@@ -154,6 +154,7 @@ class CommandData
         foreach ($this->inputFields as $field) {
             switch ($field['fieldType']) {
                 case 'integer':
+                case 'smallInteger':
                 case 'long':
                     $fieldTypes[$field['fieldName']] = "integer:int32";
                     break;
@@ -161,6 +162,7 @@ class CommandData
                     $fieldTypes[$field['fieldName']] = "number:double";
                     break;
                 case 'float':
+                case 'decimal':
                     $fieldTypes[$field['fieldName']] = "number:float";
                     break;
                 case 'boolean':
