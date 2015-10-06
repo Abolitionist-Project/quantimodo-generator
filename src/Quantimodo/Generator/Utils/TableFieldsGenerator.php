@@ -91,7 +91,7 @@ class TableFieldsGenerator
             }
 
             if (!empty($fieldInput)) {
-                $fields [] = GeneratorUtils::processFieldInput($fieldInput, $type, '');
+                $fields [] = GeneratorUtils::processFieldInput($fieldInput, $type, '', $column->getComment());
             }
         }
 

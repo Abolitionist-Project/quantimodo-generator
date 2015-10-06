@@ -15,7 +15,7 @@ class GeneratorUtils
         return true;
     }
 
-    public static function processFieldInput($fieldInputStr, $type, $validations)
+    public static function processFieldInput($fieldInputStr, $type, $validations = '', $description = '')
     {
         $fieldInputs = explode(':', $fieldInputStr);
 
@@ -45,6 +45,7 @@ class GeneratorUtils
 
         return [
             'fieldName'       => $fieldName,
+            'description'     => $description,
             'type'            => $type,
             'typeOptions'     => $typeOptions,
             'fieldInput'      => $fieldInputStr,

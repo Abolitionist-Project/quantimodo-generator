@@ -156,42 +156,52 @@ class CommandData
                 case 'integer':
                 case 'smallInteger':
                 case 'long':
-                    $fieldTypes[$field['fieldName']] = "integer:int32";
+                    $fieldType = "integer:int32";
                     break;
                 case 'double':
-                    $fieldTypes[$field['fieldName']] = "number:double";
+                    $fieldType = "number:double";
                     break;
                 case 'float':
                 case 'decimal':
-                    $fieldTypes[$field['fieldName']] = "number:float";
+                    $fieldType = "number:float";
                     break;
                 case 'boolean':
-                    $fieldTypes[$field['fieldName']] = "boolean";
+                    $fieldType = "boolean";
                     break;
                 case 'string':
                 case 'char':
                 case 'text':
                 case 'enum':
-                    $fieldTypes[$field['fieldName']] = "string";
+                    $fieldType = "string";
                     break;
                 case 'byte':
-                    $fieldTypes[$field['fieldName']] = "string:byte";
+                    $fieldType = "string:byte";
                     break;
                 case 'binary':
-                    $fieldTypes[$field['fieldName']] = "string:binary";
+                    $fieldType = "string:binary";
                     break;
                 case 'password':
-                    $fieldTypes[$field['fieldName']] = "string:password";
+                    $fieldType = "string:password";
                     break;
                 case 'date':
-                    $fieldTypes[$field['fieldName']] = "string:date";
+                    $fieldType = "string:date";
                     break;
                 case 'dateTime':
-                    $fieldTypes[$field['fieldName']] = "string:date-time";
+                    $fieldType = "string:date-time";
                     break;
                 default:
+                    $fieldType = null;
                     break;
             }
+
+            if (!empty($fieldType)) {
+                $fieldTypes[] = [
+                    'name' => $field['fieldName'],
+                    'type' => $fieldType,
+                    'description' => $field['description']
+                ];
+            }
+
         }
 
         $this->swaggerTypes = $fieldTypes;
