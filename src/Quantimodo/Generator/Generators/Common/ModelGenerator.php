@@ -99,10 +99,11 @@ class ModelGenerator implements GeneratorProvider
             if (in_array($field['fieldName'], $this->commandData->excludedFields)) {
                 continue;
             }
-            switch ($field['fieldType']) {
+            switch (strtolower($field['fieldType'])) {
                 case 'integer':
-                case 'smallInteger':
+                case 'smallinteger':
                 case 'long':
+                case 'bigint':
                     $rule = '"' . $field['fieldName'] . '" => "integer"';
                     break;
                 case 'double':

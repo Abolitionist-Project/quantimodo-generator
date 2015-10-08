@@ -152,10 +152,11 @@ class CommandData
         $fieldTypes = [];
 
         foreach ($this->inputFields as $field) {
-            switch ($field['fieldType']) {
+            switch (strtolower($field['fieldType'])) {
                 case 'integer':
-                case 'smallInteger':
+                case 'smallinteger':
                 case 'long':
+                case 'bigint':
                     $fieldType = "integer:int32";
                     break;
                 case 'double':
