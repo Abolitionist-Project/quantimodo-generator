@@ -48,9 +48,21 @@ class APIControllerGenerator implements GeneratorProvider
         $fieldTypes = $this->commandData->getSwaggerTypes();
 
         $fieldTypes = array_merge($fieldTypes, [
-            'limit' => 'integer',
-            'offset' => 'integer',
-            'sort' => 'string'
+             [
+                'name' => "limit",
+                'type' => "integer",
+                "description" => ""
+             ],
+             [
+                'name' => "offset",
+                'type' => "integer",
+                "description" => ""
+             ],
+             [
+                'name' => "sort",
+                'type' => "string",
+                "description" => ""
+             ]
         ]);
 
         $templateData = str_replace('$PARAMETERS$', implode(",\n", $this->generateSwagger($fieldTypes)), $templateData);

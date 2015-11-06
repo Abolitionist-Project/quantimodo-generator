@@ -64,7 +64,7 @@ class TableFieldsGenerator
                     $type = 'text';
                     break;
                 case 'decimal':
-                    $fieldInput = $this->generateDecimalInput($column, 'decimal');
+                    $fieldInput = $this->generateDecimalInput($column);
                     $type = 'number';
                     break;
                 case 'float':

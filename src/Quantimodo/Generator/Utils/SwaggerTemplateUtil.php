@@ -38,7 +38,9 @@ class SwaggerTemplateUtil
     {
         $templates = [];
 
-        foreach ($fields as $field => $type) {
+        foreach ($fields as $fieldObj) {
+            $field = $fieldObj['name'];
+            $type = $fieldObj['type'];
             $type = explode(":", $type);
             $type = $type[0];
             $propertyTemplate = str_replace('$FIELD_NAME$', $field, $template);

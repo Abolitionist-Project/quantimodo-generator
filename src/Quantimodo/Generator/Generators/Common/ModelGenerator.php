@@ -56,7 +56,7 @@ class ModelGenerator implements GeneratorProvider
         $fillables = [];
 
         foreach ($this->commandData->inputFields as $field) {
-            if (in_array($field['fieldName'], $this->commandData->excludedFields) or $field['fieldName']== "id") {
+            if (in_array($field['fieldName'], $this->commandData->excludedFields) or $field['fieldName'] == "id") {
                 continue;
             }
             $fillables[] = '"' . $field['fieldName'] . '"';
