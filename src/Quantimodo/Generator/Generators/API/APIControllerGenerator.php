@@ -51,17 +51,17 @@ class APIControllerGenerator implements GeneratorProvider
              [
                 'name' => "limit",
                 'type' => "integer",
-                "description" => ""
+                "description" => "Limit the number of results returned"
              ],
              [
                 'name' => "offset",
                 'type' => "integer",
-                "description" => ""
+                "description" => "Records from give Offset"
              ],
              [
                 'name' => "sort",
                 'type' => "string",
-                "description" => ""
+                "description" => "Sort records by given field"
              ]
         ]);
 
